@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
+from datetime import date
 
 app = Flask(__name__)
 
@@ -21,7 +22,11 @@ class Veranstaltung(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    datum = request.args.get('datum', str(date.today()))
+    kategorie = request.args.get('kategorie', 'Party')
+
+    veranstaltungen = Veranstaltung.query.filter(Veranstaltung.datum >= datum, Veranstaltung.kategorie == kategorie).all()
+    return render_template('index.html', veranstaltungen=veranstaltungen, heute=str(date.today()))
 
 @app.route('/einreichen', methods=["GET", "POST"])
 def einreichen():

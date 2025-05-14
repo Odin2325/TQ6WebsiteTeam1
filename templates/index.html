@@ -6,42 +6,25 @@
     <title>Campus Events Hub</title>
 </head>
 <body>
-    <label for="veranstaltungen">Wahle eine Veranstaltung</label>
-    <select name="veranstaltung" id="veranstaltung">
-    <option value="Party">Party</option>
-    <option value="Konzert">Konzert</option>
-    <option value="Festival">Festival</option>
-    <option value="Filmabend">Filmabend</option>
-    <option value="Karaoke">Karaoke</option>
-    </select>
-
-    <label for="datum">Von :</label>
-    <input type="date" name="datum" id="datum">
-    <label for="datum2">Bis :</label>
-    <input type="date" name="datum2" id="datum2">
-
-    <button type="submit">Suchen</button>
-<script>                   
- if (pizzaRadio8 && sizeRadio8 && menge8 > 0) {
-                    console.log(`Pizza 8 ausgewählt - Größe: ${sizeRadio8.value}, Menge: ${menge8}, Zutaten: ${Array.from(zutatenCheckboxes8).map(cb => cb.value).join(", ")}`);
-                    const pizzaName8 = pizzaRadio8.value;
-                    const pizzaGröße8 = sizeRadio8.value;
-                    const zutaten8 = Array.from(zutatenCheckboxes8).map(cb => cb.value);
-
-                    // Berechne Einzelpreis und Gesamtpreis
-                    const einzelpreis8 = berechneEinzelpreis(pizzaName8, pizzaGröße8, zutaten8);
-                    const gesamtPreis8 = einzelpreis8 * menge8;
-
-                    // Bestellzeile formatieren
-                    const listItem8 = document.createElement("li");
-                    listItem8.textContent = `${menge8}x Pizza ${pizzaName8} - ${pizzaGröße8} - mit ${zutaten8.join(", ") || "keinen Extras"} — €${gesamtPreis8.toFixed(2)}`;
-                    bestellliste.appendChild(listItem8);
-
-                    // Gesamtbestellwert addieren
-                    gesamtBestellwert += gesamtPreis8;
-                }
-                preisfeld.value = `€${gesamtBestellwert.toFixed(2)}`;
- </script>
-
+    <form>
+        <label for="veranstaltungen">Wahle eine Veranstaltung</label>
+        <select name="kategorie" id="veranstaltung">
+        <option value="Party">Party</option>
+        <option value="Konzert">Konzert</option>
+        <option value="Festival">Festival</option>
+        <option value="Filmabend">Filmabend</option>
+        <option value="Karaoke">Karaoke</option>
+        </select>
+    
+        <label for="datum">Ab:</label>
+        <input type="date" name="datum" id="datum">
+        <button type="submit">Suchen</button>
+    </form>
+    
+    <ul>
+        {% for veranstaltung in veranstaltungen %}
+        <li>{{ veranstaltung.titel }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
