@@ -13,7 +13,6 @@ Erstellen Sie eine Webanwendung namens **"Campus Events Hub"**, über die Studie
 Jede Gruppe muss:
 
 - Ein **GitHub-Repository** erstellen und alle Mitglieder einladen.
-- Rollen zuweisen (z. B. Frontend, Backend, Git-Manager).
 - Für jedes Feature **Branches** verwenden (z. B. „Event-Formular“, „Filter-Feature“, „Datenbankmodelle“).
 - **Pull Requests** erstellen und den Code der anderen vor dem Mergen überprüfen.
 - Einen übersichtlichen **Commit-Verlauf** mit aussagekräftigen Nachrichten pflegen.
