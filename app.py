@@ -25,7 +25,10 @@ def index():
     datum = request.args.get('datum', str(date.today()))
     kategorie = request.args.get('kategorie', 'Party')
 
-    veranstaltungen = Veranstaltung.query.filter(Veranstaltung.datum >= datum, Veranstaltung.kategorie == kategorie).all()
+    veranstaltungen = Veranstaltung.query.filter(
+        Veranstaltung.datum >= datum,
+        Veranstaltung.kategorie == kategorie).all()
+    
     return render_template('index.html', veranstaltungen=veranstaltungen)
 
 @app.route('/einreichen', methods=["GET", "POST"])
