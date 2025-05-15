@@ -44,6 +44,12 @@ def index():
         kategorien=kategorien,
         selected=kategorie)
 
+@app.route('/detail/<int:id>')
+def detail(id):
+    veranstaltung = Veranstaltung.query.filter(
+        Veranstaltung.id == id).first()
+    return render_template('detail.html', veranstaltung=veranstaltung)
+
 @app.route('/einreichen', methods=["GET", "POST"])
 def einreichen():
     if request.method == "POST":

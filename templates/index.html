@@ -28,7 +28,7 @@
     </form>
     <div class="veranstaltungen-container">
         {% for veranstaltung in veranstaltungen %}
-            <a href="/detail?{{ veranstaltung.id }}">
+            <a href="/detail/{{ veranstaltung.id }}">
                 <div class="veranstaltung">
                     <h3>{{ veranstaltung.titel }}</h3>
                     <p>{{ veranstaltung.datum }}</p>
