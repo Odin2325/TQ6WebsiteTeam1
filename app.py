@@ -27,6 +27,7 @@ class Veranstaltung(db.Model):
     ort = db.Column(db.String())
     kategorie = db.Column(db.String())
     datum = db.Column(db.String())
+    counter = db.Column(db.Integer)
 
 @app.route('/')
 def index():
@@ -48,6 +49,8 @@ def index():
 def detail(id):
     veranstaltung = Veranstaltung.query.filter(
         Veranstaltung.id == id).first()
+    veranstaltung.counter += 1
+    db.session.commit()
     return render_template('detail.html', veranstaltung=veranstaltung)
 
 @app.route('/einreichen', methods=["GET", "POST"])
@@ -58,7 +61,8 @@ def einreichen():
             beschreibung=request.form["beschreibung"],
             datum=request.form["datum"],
             ort=request.form["ort"],
-            kategorie=request.form["kategorie"]
+            kategorie=request.form["kategorie"],
+            counter=0
         )
         db.session.add(veranstaltung)
         db.session.commit()
