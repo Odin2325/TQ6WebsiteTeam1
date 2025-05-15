@@ -1,19 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="POST">
-        <select name="kategorie" id="veranstaltung">
-            {% for kategorie in kategorien %}
-                <option value="{{ kategorie }}">{{ kategorie }}</option>
-            {% endfor %}
-        </select><br>
-        <label for="titel">Titel:</label> <br>
-        <input type="text" name="titel" id=""> <br>
-        <label for="beschreibung"></label> <br>
-        <textarea name="beschreibung" id="">beispiel</textarea> <br>
-        <label for="ort">ORT</label> <br>
-        <input type="text" name="ort" id=""> <br>
-        <label for="datum"></label> <br>
-        <input type="date" name="datum" id=""> <br>
-        <input type="submit" value="Eintragen"> <br>
-    </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-lg-5">
+            <form method="POST">
+                <div class="form-floating mb-3">
+                    <select class="form-select" name="kategorie" id="kategorie">
+                        {% for kategorie in kategorien %}
+                        <option value="{{ kategorie }}">{{ kategorie }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="kategorie">Kategorie</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" name="titel" id="titel" placeholder="">
+                    <label for="titel">Titel</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" style="height: 200px;" name="beschreibung" id="beschreibung" placeholder=""></textarea>
+                    <label for="beschreibung">Beschreibungstext</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="text" name="ort" id="ort" placeholder="">
+                    <label for="ort">Ort</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" type="date" name="datum" id="">
+                    <label for="datum"></label>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Eintragen">
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
