@@ -1,9 +1,36 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h3>{{ veranstaltung.titel}}</h3>
-    <p>{{ veranstaltung.datum }}</p>
-    <p>{{ veranstaltung.ort }}</p>
-    <p>{{ veranstaltung.kategorie }}</p>
-    <p>{{ veranstaltung.beschreibung }}</p>
-    <p>{{ veranstaltung.counter }}</p>
-{% endblock %}
+<h3>{{ veranstaltung.titel }}</h3>
+<p>{{ veranstaltung.datum }}</p>
+<p>{{ veranstaltung.ort }}</p>
+<p>{{ veranstaltung.kategorie }}</p>
+<p>{{ veranstaltung.beschreibung }}</p>
+<p>Like count: <span id="like-count">{{ veranstaltung.counter }}</span></p>
+
+<button id="like-button">👍 Like</button>
+
+<script>
+  const likeButton = document.getElementById("like-button");
+  const likeCount = document.getElementById("like-count");
+  const veranstaltungId = "{{ veranstaltung.id }}";
+
+  // Check ob fruher schon gedruckt wurde.
+  if (localStorage.getItem(`liked_${veranstaltungId}`)) {
+    likeButton.disabled = true;
+    likeButton.textContent = "❤️ Gefällt mir";
+  }
+
+  likeButton.addEventListener("click", () => {
+    fetch(`/like/${veranstaltungId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        likeCount.textContent = data.new_count;
+        likeButton.disabled = true;
+        likeButton.textContent = "❤️ Gefällt mir";
+        // Speicher gefallt mir.
+        localStorage.setItem(`liked_${veranstaltungId}`, true);
+      })
+      .catch((err) => console.error(err));
+  });
+</script>

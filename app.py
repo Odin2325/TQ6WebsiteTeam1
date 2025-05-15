@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import date
@@ -29,6 +29,13 @@ class Veranstaltung(db.Model):
     datum = db.Column(db.String())
     counter = db.Column(db.Integer)
 
+@app.route('/like/<int:id>', methods=['POST'])
+def like(id):
+    veranstaltung = Veranstaltung.query.get_or_404(id)
+    veranstaltung.counter = veranstaltung.counter + 1
+    db.session.commit()
+    return jsonify({'new_count': veranstaltung.counter})
+
 @app.route('/')
 def index():
     datum = request.args.get('datum', str(date.today()))
@@ -49,7 +56,6 @@ def index():
 def detail(id):
     veranstaltung = Veranstaltung.query.filter(
         Veranstaltung.id == id).first()
-    veranstaltung.counter += 1
     db.session.commit()
     return render_template('detail.html', veranstaltung=veranstaltung)
 
