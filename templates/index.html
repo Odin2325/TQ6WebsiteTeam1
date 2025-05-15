@@ -3,7 +3,9 @@
     <style>
         .veranstaltungen-container {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
             gap: 20px;
         }
 
@@ -12,19 +14,30 @@
             border-radius: 20px;
             padding: 20px;
         }
+
+        .form {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
     </style>
-    <form>
-        <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
-            {% for kategorie in kategorien %}
-                <option value="{{ kategorie }}" {% if kategorie == selected %} selected {% endif %}>{{ kategorie }}</option>
-            {% endfor %}
-        </select>
-    
-        <label for="datum">Ab:</label>
-        <input type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
-        <noscript>
-            <button type="submit">Suchen</button>
-        </noscript>
+    <form class="form">
+        <div>
+            <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
+                {% for kategorie in kategorien %}
+                    <option value="{{ kategorie }}" {% if kategorie == selected %} selected {% endif %}>{{ kategorie }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="datum">Ab:</label>
+            <input type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
+        </div>
+        <div>
+            <noscript>
+                <button type="submit">Suchen</button>
+            </noscript>
+        </div>
     </form>
     <div class="veranstaltungen-container">
         {% for veranstaltung in veranstaltungen %}
