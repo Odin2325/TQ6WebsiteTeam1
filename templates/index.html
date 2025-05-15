@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
+    <style>
+        .veranstaltungen-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .veranstaltung {
+            border: 1px black solid;
+            border-radius: 20px;
+            padding: 20px;
+        }
+    </style>
     <form>
         <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
             {% for kategorie in kategorien %}
@@ -13,10 +26,14 @@
             <button type="submit">Suchen</button>
         </noscript>
     </form>
-    
-    <ul>
+    <div class="veranstaltungen-container">
         {% for veranstaltung in veranstaltungen %}
-        <li>{{ veranstaltung.titel }}</li>
+            <a href="/detail?{{ veranstaltung.id }}">
+                <div class="veranstaltung">
+                    <h3>{{ veranstaltung.titel }}</h3>
+                    <p>{{ veranstaltung.datum }}</p>
+                </div>
+            </a>
         {% endfor %}
-    </ul>
-{% endblock %}
+    </div>
+    {% endblock %}
