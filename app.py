@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import os
 from datetime import date
 from markupsafe import escape
+import os
 
 app = Flask(__name__)
 
@@ -40,14 +40,13 @@ def like(id):
 @app.route('/')
 def index():
     datum = request.args.get('datum', str(date.today()))
+
     if request.args.get('kategorie') == None:
         selected = kategorien
     else:
         selected = request.args.getlist('kategorie')
-    # selected = ['Party','Konzert']
     
     veranstaltungen = []
-
     for kategorie in selected:
         veranstaltungen += Veranstaltung.query.filter(
             Veranstaltung.datum >= datum,
