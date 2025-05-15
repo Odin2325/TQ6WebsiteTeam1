@@ -6,18 +6,18 @@ from datetime import date
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(basedir, "app.db")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + db_path
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db_path = os.path.join(basedir, 'app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
 kategorien = [
-    "Party",
-    "Konzert",
-    "Festival",
-    "Filmabend",
-    "Karaoke"
+    'Party',
+    'Konzert',
+    'Festival',
+    'Filmabend',
+    'Karaoke'
 ]
 
 class Veranstaltung(db.Model):
@@ -44,7 +44,7 @@ def index():
     veranstaltungen = Veranstaltung.query.filter(
         Veranstaltung.datum >= datum,
         Veranstaltung.kategorie == kategorie).all()
-    
+
     return render_template(
         'index.html',
         veranstaltungen=veranstaltungen,
@@ -59,15 +59,15 @@ def detail(id):
     db.session.commit()
     return render_template('detail.html', veranstaltung=veranstaltung)
 
-@app.route('/einreichen', methods=["GET", "POST"])
+@app.route('/einreichen', methods=['GET', 'POST'])
 def einreichen():
-    if request.method == "POST":
+    if request.method == 'POST':
         veranstaltung = Veranstaltung(
-            titel=request.form["titel"],
-            beschreibung=request.form["beschreibung"],
-            datum=request.form["datum"],
-            ort=request.form["ort"],
-            kategorie=request.form["kategorie"],
+            titel=request.form['titel'],
+            beschreibung=request.form['beschreibung'],
+            datum=request.form['datum'],
+            ort=request.form['ort'],
+            kategorie=request.form['kategorie'],
             counter=0
         )
         db.session.add(veranstaltung)
