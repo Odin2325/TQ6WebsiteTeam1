@@ -1,36 +1,59 @@
-<h3>{{ veranstaltung.titel }}</h3>
-<p>{{ veranstaltung.datum }}</p>
-<p>{{ veranstaltung.ort }}</p>
-<p>{{ veranstaltung.kategorie }}</p>
-<p>{{ veranstaltung.beschreibung }}</p>
-<p>Like count: <span id="like-count">{{ veranstaltung.counter }}</span></p>
-
-<button id="like-button">👍 Like</button>
-
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-lg-5 detailansicht">
+            <div class="row justify-content-center veranstaltungs-icon">
+                {% if veranstaltung.kategorie == 'Party' %}
+                🎉
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Konzert' %}
+                🎫
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Filmabend' %}
+                🎞️
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Karaoke' %}
+                🎤
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Festival' %}
+                🎪
+                {% endif %}
+            </div>
+            <h3 class="row justify-content-center" >{{ veranstaltung.titel }}</h3>
+            <div class="mb-3">Wann: {{ veranstaltung.datum }}</div>
+            <div class="mb-3">Wo: {{ veranstaltung.ort }}</div>
+            <p class="mb-3">{{ veranstaltung.beschreibung }}</p>
+            <div class="mb-3">Like count: <span id="like-count">{{ veranstaltung.counter }}</span></div>
+            <button class="btn btn-secondary" id="like-button">👍 Like</button>
+        </div>
+    </div>
+</div>
 <script>
-  const likeButton = document.getElementById("like-button");
-  const likeCount = document.getElementById("like-count");
-  const veranstaltungId = "{{ veranstaltung.id }}";
+const likeButton = document.getElementById("like-button");
+const likeCount = document.getElementById("like-count");
+const veranstaltungId = "{{ veranstaltung.id }}";
 
-  // Check ob fruher schon gedruckt wurde.
-  if (localStorage.getItem(`liked_${veranstaltungId}`)) {
+// Check ob fruher schon gedruckt wurde.
+if (localStorage.getItem(`liked_${veranstaltungId}`)) {
     likeButton.disabled = true;
     likeButton.textContent = "❤️ Gefällt mir";
-  }
+}
 
-  likeButton.addEventListener("click", () => {
+likeButton.addEventListener("click", () => {
     fetch(`/like/${veranstaltungId}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     })
-      .then((response) => response.json())
-      .then((data) => {
+    .then((response) => response.json())
+    .then((data) => {
         likeCount.textContent = data.new_count;
         likeButton.disabled = true;
         likeButton.textContent = "❤️ Gefällt mir";
         // Speicher gefallt mir.
         localStorage.setItem(`liked_${veranstaltungId}`, true);
-      })
-      .catch((err) => console.error(err));
-  });
+    })
+    .catch((err) => console.error(err));
+});
 </script>
+{% endblock %}
