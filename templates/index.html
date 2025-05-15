@@ -10,7 +10,9 @@
     
         <label for="datum">Ab:</label>
         <input type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
-        <button type="submit">Suchen</button>
+        <noscript>
+            <button type="submit">Suchen</button>
+        </noscript>
     </form>
     
     <ul>
