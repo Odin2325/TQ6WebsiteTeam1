@@ -4,7 +4,7 @@
         <label for="veranstaltungen">Wahle eine Veranstaltung</label>
         <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
             {% for kategorie in kategorien %}
-                <option value="{{ kategorie }}">{{ kategorie }}</option>
+                <option value="{{ kategorie }}" {% if kategorie == selected %} selected {% endif %}>{{ kategorie }}</option>
             {% endfor %}
         </select>
     

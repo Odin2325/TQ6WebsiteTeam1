@@ -37,7 +37,12 @@ def index():
         Veranstaltung.datum >= datum,
         Veranstaltung.kategorie == kategorie).all()
     
-    return render_template('index.html', veranstaltungen=veranstaltungen, datum=datum, kategorien=kategorien)
+    return render_template(
+        'index.html',
+        veranstaltungen=veranstaltungen,
+        datum=datum,
+        kategorien=kategorien,
+        selected=kategorie)
 
 @app.route('/einreichen', methods=["GET", "POST"])
 def einreichen():
