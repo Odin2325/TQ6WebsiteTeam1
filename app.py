@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+﻿from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import date
@@ -70,4 +70,4 @@ def einreichen():
 
 with app.app_context():
     db.create_all()
-app.run(debug=True)
+app.run(debug=True, port=5001)
