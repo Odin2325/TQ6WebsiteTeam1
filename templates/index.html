@@ -2,14 +2,14 @@
 {% block content %}
     <form>
         <label for="veranstaltungen">Wahle eine Veranstaltung</label>
-        <select name="kategorie" id="veranstaltung">
+        <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
             {% for kategorie in kategorien %}
                 <option value="{{ kategorie }}">{{ kategorie }}</option>
             {% endfor %}
         </select>
     
         <label for="datum">Ab:</label>
-        <input type="date" name="datum" id="datum" value="{{ datum }}">
+        <input type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
         <button type="submit">Suchen</button>
     </form>
     
