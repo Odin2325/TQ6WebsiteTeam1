@@ -48,7 +48,7 @@ def index():
 
     veranstaltungen = Veranstaltung.query.filter(
             Veranstaltung.datum >= datum,
-            Veranstaltung.kategorie.in_(selected)).all()
+            Veranstaltung.kategorie.in_(selected)).order_by(Veranstaltung.datum).all()
 
     return render_template(
         'index.html',
