@@ -40,18 +40,25 @@ def like(id):
 @app.route('/')
 def index():
     datum = request.args.get('datum', str(date.today()))
-    kategorie = request.args.get('kategorie', 'Party')
+    if request.args.get('kategorie') == None:
+        selected = kategorien
+    else:
+        selected = request.args.getlist('kategorie')
+    # selected = ['Party','Konzert']
+    
+    veranstaltungen = []
 
-    veranstaltungen = Veranstaltung.query.filter(
-        Veranstaltung.datum >= datum,
-        Veranstaltung.kategorie == kategorie).all()
+    for kategorie in selected:
+        veranstaltungen += Veranstaltung.query.filter(
+            Veranstaltung.datum >= datum,
+            Veranstaltung.kategorie == kategorie).all()
 
     return render_template(
         'index.html',
         veranstaltungen=veranstaltungen,
         datum=datum,
         kategorien=kategorien,
-        selected=kategorie)
+        selected=selected)
 
 @app.route('/detail/<int:id>')
 def detail(id):
@@ -66,7 +73,7 @@ def einreichen():
         beschreibung = request.form['beschreibung']
         beschreibung = str(escape(beschreibung))
         beschreibung = beschreibung.replace('\r\n','<br>')
-        
+
         veranstaltung = Veranstaltung(
             titel=request.form['titel'],
             beschreibung=beschreibung,

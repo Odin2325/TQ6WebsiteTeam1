@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form class="form">
-        <div>
-            <select class="font" name="kategorie" id="veranstaltung" onchange="this.form.submit()">
+    <form style="display: flex; flex-direction: column; align-items: center;">
+        <div class="mb-3" style="display: block;">
+            <div style="display: flex; gap: 2em;">
                 {% for kategorie in kategorien %}
-                    <option value="{{ kategorie }}" {% if kategorie == selected %} selected {% endif %}>{{ kategorie }}</option>
+                    <div class="form-check form-switch" >
+                        <input class="form-check-input" type="checkbox" name="kategorie" id="{{ kategorie }}"
+                            {% if kategorie in selected %} checked {% endif %} value="{{ kategorie }}" onchange="this.form.submit()">
+                        <label for="{{ kategorie }}">{{ kategorie }}</label>
+                    </div>
                 {% endfor %}
-            </select>
+            </div>
         </div>
         <div>
             <label class="font" for="datum">Ab:</label>
