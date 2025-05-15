@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
     <form>
-        <label for="veranstaltungen">Wahle eine Veranstaltung</label>
         <select name="kategorie" id="veranstaltung" onchange="this.form.submit()">
             {% for kategorie in kategorien %}
                 <option value="{{ kategorie }}" {% if kategorie == selected %} selected {% endif %}>{{ kategorie }}</option>
