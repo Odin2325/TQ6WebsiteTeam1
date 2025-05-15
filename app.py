@@ -12,6 +12,14 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+kategorien = [
+    "Party",
+    "Konzert",
+    "Festival",
+    "Filmabend",
+    "Karaoke"
+]
+
 class Veranstaltung(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titel = db.Column(db.String())
@@ -29,7 +37,7 @@ def index():
         Veranstaltung.datum >= datum,
         Veranstaltung.kategorie == kategorie).all()
     
-    return render_template('index.html', veranstaltungen=veranstaltungen, datum=datum)
+    return render_template('index.html', veranstaltungen=veranstaltungen, datum=datum, kategorien=kategorien)
 
 @app.route('/einreichen', methods=["GET", "POST"])
 def einreichen():
@@ -43,7 +51,7 @@ def einreichen():
         )
         db.session.add(veranstaltung)
         db.session.commit()
-    return render_template('einreichen.html')
+    return render_template('einreichen.html', kategorien=kategorien)
 
 with app.app_context():
     db.create_all()

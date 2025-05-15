@@ -8,11 +8,9 @@
 <body>
     <form method="POST">
         <select name="kategorie" id="veranstaltung">
-            <option value="Party">Party</option>
-            <option value="Konzert">Konzert</option>
-            <option value="Festival">Festival</option>
-            <option value="Filmabend">Filmabend</option>
-            <option value="Karaoke">Karaoke</option>
+            {% for kategorie in kategorien %}
+                <option value="{{ kategorie }}">{{ kategorie }}</option>
+            {% endfor %}
         </select><br>
         <label for="titel">Titel:</label> <br>
         <input type="text" name="titel" id=""> <br>
