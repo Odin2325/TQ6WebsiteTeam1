@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Events Hub</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <form>
         <label for="veranstaltungen">Wahle eine Veranstaltung</label>
         <select name="kategorie" id="veranstaltung">
@@ -24,5 +18,4 @@
         <li>{{ veranstaltung.titel }}</li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
