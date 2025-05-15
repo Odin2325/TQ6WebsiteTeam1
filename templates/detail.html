@@ -23,7 +23,7 @@
             <h3 class="row justify-content-center" >{{ veranstaltung.titel }}</h3>
             <div class="mb-3">Wann: {{ veranstaltung.datum }}</div>
             <div class="mb-3">Wo: {{ veranstaltung.ort }}</div>
-            <p class="mb-3">{{ veranstaltung.beschreibung }}</p>
+            <p class="mb-3">{{ veranstaltung.beschreibung | safe}}</p>
             <div class="mb-3">Like count: <span id="like-count">{{ veranstaltung.counter }}</span></div>
             <button class="btn btn-secondary" id="like-button">👍 Like</button>
         </div>

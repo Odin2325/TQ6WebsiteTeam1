@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from datetime import date
+from markupsafe import escape
 
 app = Flask(__name__)
 
@@ -62,9 +63,13 @@ def detail(id):
 @app.route('/einreichen', methods=['GET', 'POST'])
 def einreichen():
     if request.method == 'POST':
+        beschreibung = request.form['beschreibung']
+        beschreibung = str(escape(beschreibung))
+        beschreibung = beschreibung.replace('\r\n','<br>')
+        
         veranstaltung = Veranstaltung(
             titel=request.form['titel'],
-            beschreibung=request.form['beschreibung'],
+            beschreibung=beschreibung,
             datum=request.form['datum'],
             ort=request.form['ort'],
             kategorie=request.form['kategorie'],
