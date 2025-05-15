@@ -10,12 +10,16 @@
     body {
         background-color: aliceblue;
     }
+    nav {
+        display: flex;
+        justify-content: center;
+    }
 </style>
 <body>
     <nav>
         <ul class="nav">
-            <li class="nav-item"><a href="/">Liste</a></li>
-            <li><a href="/einreichen">Einreichen</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Liste</a></li>
+            <li><a class="nav-link" href="/einreichen">Einreichen</a></li>
         </ul>
     </nav>
     {% block content %}
