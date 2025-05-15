@@ -10,16 +10,22 @@
         }
 
         .veranstaltung {
+            display: flex;
             margin-top: 30px;
             border: 1px black solid;
             border-radius: 20px;
             padding: 20px;
+            gap: 10px;
         }
 
         .form {
             display: flex;
             gap: 20px;
             justify-content: center;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
         }
     </style>
     <form class="form">
@@ -44,8 +50,27 @@
         {% for veranstaltung in veranstaltungen %}
             <a href="/detail/{{ veranstaltung.id }}">
                 <div class="veranstaltung">
-                    <h3>{{ veranstaltung.titel }}</h3>
-                    <p>{{ veranstaltung.datum }}</p>
+                    <div style="font-size: 48px;">
+                        {% if veranstaltung.kategorie == 'Party' %}
+                        🎉
+                        {% endif %}
+                        {% if veranstaltung.kategorie == 'Konzert' %}
+                        🎫
+                        {% endif %}
+                        {% if veranstaltung.kategorie == 'Filmabend' %}
+                        🎞️
+                        {% endif %}
+                        {% if veranstaltung.kategorie == 'Karaoke' %}
+                        🎤
+                        {% endif %}
+                        {% if veranstaltung.kategorie == 'Festival' %}
+                        🎪
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h3>{{ veranstaltung.titel }}</h3>
+                        <p>{{ veranstaltung.datum }}</p>
+                    </div>
                 </div>
             </a>
         {% endfor %}
