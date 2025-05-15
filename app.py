@@ -45,12 +45,10 @@ def index():
         selected = kategorien
     else:
         selected = request.args.getlist('kategorie')
-    
-    veranstaltungen = []
-    for kategorie in selected:
-        veranstaltungen += Veranstaltung.query.filter(
+
+    veranstaltungen = Veranstaltung.query.filter(
             Veranstaltung.datum >= datum,
-            Veranstaltung.kategorie == kategorie).all()
+            Veranstaltung.kategorie.in_(selected)).all()
 
     return render_template(
         'index.html',
