@@ -41,10 +41,8 @@ def like(id):
 def index():
     datum = request.args.get('datum', str(date.today()))
 
-    if request.args.get('kategorie') == None:
-        selected = kategorien
-    else:
-        selected = request.args.getlist('kategorie')
+    selected = request.args.getlist('kategorie')
+    if selected == []: selected = kategorien
 
     veranstaltungen = Veranstaltung.query.filter(
             Veranstaltung.datum >= datum,
