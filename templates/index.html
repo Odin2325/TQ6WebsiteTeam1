@@ -1,54 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form style="display: flex; flex-direction: column; align-items: center;">
-        <div class="mb-3" style="display: block;">
-            <div style="display: flex; gap: 2em;">
-                {% for kategorie in kategorien %}
-                    <div class="form-check form-switch" >
-                        <input class="form-check-input" type="checkbox" name="kategorie" id="{{ kategorie }}"
-                            {% if kategorie in selected %} checked {% endif %} value="{{ kategorie }}" onchange="this.form.submit()">
-                        <label for="{{ kategorie }}">{{ kategorie }}</label>
-                    </div>
-                {% endfor %}
+<form class="kategorien-form">
+    <div class="mb-3">
+        <div class="kategorien-auswahl">
+            {% for kategorie in kategorien %}
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="kategorie" id="{{ kategorie }}" {% if kategorie in
+                    selected %} checked {% endif %} value="{{ kategorie }}" onchange="this.form.submit()">
+                <label for="{{ kategorie }}">{{ kategorie }}</label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <label class="font" for="datum">Ab:</label>
+        <input class="font" type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
+    </div>
+    <div>
+        <noscript>
+            <button class="font" type="submit">Suchen</button>
+        </noscript>
+    </div>
+</form>
+<div class="veranstaltungen-container">
+    {% for veranstaltung in veranstaltungen %}
+    <a href="/detail/{{ veranstaltung.id }}">
+        <div class="veranstaltung">
+            <div class="veranstaltungs-icon">
+                {% if veranstaltung.kategorie == 'Party' %}
+                🎉
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Konzert' %}
+                🎸
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Filmabend' %}
+                🎞️
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Karaoke' %}
+                🎤
+                {% endif %}
+                {% if veranstaltung.kategorie == 'Festival' %}
+                🎪
+                {% endif %}
+            </div>
+            <div>
+                <h3>{{ veranstaltung.titel }}</h3>
+                <p>{{ veranstaltung.datum }}</p>
             </div>
         </div>
-        <div>
-            <label class="font" for="datum">Ab:</label>
-            <input class="font" type="date" name="datum" id="datum" value="{{ datum }}" onchange="this.form.submit()">
-        </div>
-        <div>
-            <noscript>
-                <button class="font" type="submit">Suchen</button>
-            </noscript>
-        </div>
-    </form>
-    <div class="veranstaltungen-container">
-        {% for veranstaltung in veranstaltungen %}
-            <a href="/detail/{{ veranstaltung.id }}">
-                <div class="veranstaltung">
-                    <div class="veranstaltungs-icon">
-                        {% if veranstaltung.kategorie == 'Party' %}
-                        🎉
-                        {% endif %}
-                        {% if veranstaltung.kategorie == 'Konzert' %}
-                        🎸
-                        {% endif %}
-                        {% if veranstaltung.kategorie == 'Filmabend' %}
-                        🎞️
-                        {% endif %}
-                        {% if veranstaltung.kategorie == 'Karaoke' %}
-                        🎤
-                        {% endif %}
-                        {% if veranstaltung.kategorie == 'Festival' %}
-                        🎪
-                        {% endif %}
-                    </div>
-                    <div>
-                        <h3>{{ veranstaltung.titel }}</h3>
-                        <p>{{ veranstaltung.datum }}</p>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
-    {% endblock %}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
