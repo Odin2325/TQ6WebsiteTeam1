@@ -79,6 +79,7 @@ def einreichen():
         )
         db.session.add(veranstaltung)
         db.session.commit()
+        return redirect('/')
     return render_template('einreichen.html', kategorien=kategorien)
 
 with app.app_context():
