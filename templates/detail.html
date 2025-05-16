@@ -21,10 +21,10 @@
                 {% endif %}
             </div>
             <h3 class="row justify-content-center" >{{ veranstaltung.titel }}</h3>
-            <div class="mb-3">Wann: {{ veranstaltung.datum }}</div>
-            <div class="mb-3">Wo: {{ veranstaltung.ort }}</div>
+            <div class="mb-3"><strong>Wann:</strong> {{ veranstaltung.datum }}</div>
+            <div class="mb-3"><strong>Wo:</strong> {{ veranstaltung.ort }}</div>
             <p class="mb-3">{{ veranstaltung.beschreibung | safe}}</p>
-            <div class="mb-3">Like count: <span id="like-count">{{ veranstaltung.counter }}</span></div>
+            <div class="mb-3 mt-5">Like count: <span id="like-count">{{ veranstaltung.counter }}</span></div>
             <button class="btn btn-secondary" id="like-button">👍 Like</button>
         </div>
     </div>
